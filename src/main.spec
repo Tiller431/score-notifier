@@ -4,7 +4,7 @@
 block_cipher = None
 
 
-a = Analysis(['D:/Github/score-notifier/main.py'],
+a = Analysis(['main.py'],
              pathex=['C:\\Users\\Tiller\\AppData\\Local\\Temp\\tmpxueqr_6d'],
              binaries=[],
              datas=[],
