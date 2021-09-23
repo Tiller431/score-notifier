@@ -4,7 +4,7 @@ import os
 import json
 import time
 import logging as log
-from discord import SyncWebhook
+
 
 # Config
 lbwh = SyncWebhook.from_url("https://discord.com/api/webhooks/890431880124563527/nJPDD0Si0qhstTN_vx1Oq36qI0d4PPqFtXUvl-s9o9n80dIpfj1uDsKEvXSWif35C76Y")
@@ -12,6 +12,11 @@ ppwh = SyncWebhook.from_url("https://discord.com/api/webhooks/890472004002664448
 log.basicConfig(level=log.INFO)
 url = "http://127.0.0.1:24050/json"
 
+def sendMSG(msg, url):
+    data = {
+    "content" : msg,
+    }
+    requests.post(url, json = data)
 
 def startGosu():
     # Change this to the path of your exe if this isnt in the same directory
