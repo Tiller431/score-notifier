@@ -7,8 +7,8 @@ import logging as log
 
 
 # Config
-lbwh = SyncWebhook.from_url("https://discord.com/api/webhooks/890431880124563527/nJPDD0Si0qhstTN_vx1Oq36qI0d4PPqFtXUvl-s9o9n80dIpfj1uDsKEvXSWif35C76Y")
-ppwh = SyncWebhook.from_url("https://discord.com/api/webhooks/890472004002664448/T58YyTYxJMijUOyNTdxUxVh4i5fX8a0h9SUvmnyotJPWXxnEuDZGVwtndEUjacL5KTNg")
+lbwh = "https://discord.com/api/webhooks/890431880124563527/nJPDD0Si0qhstTN_vx1Oq36qI0d4PPqFtXUvl-s9o9n80dIpfj1uDsKEvXSWif35C76Y"
+ppwh = "https://discord.com/api/webhooks/890472004002664448/T58YyTYxJMijUOyNTdxUxVh4i5fX8a0h9SUvmnyotJPWXxnEuDZGVwtndEUjacL5KTNg"
 log.basicConfig(level=log.INFO)
 url = "http://127.0.0.1:24050/json"
 
