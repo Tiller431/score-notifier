@@ -25,8 +25,17 @@ jobs:
         name: notifier
         path: src/dist/windows
     
-    # Create release for autoupdate
-    - uses: marvinpinto/action-automatic-releases@latest
+  pre-release:
+    name: "Pre Release"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      # ...
+      - name: "Build & test"
+        run: |
+          echo "done!"
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
