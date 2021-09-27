@@ -12,15 +12,22 @@ ppwh = "https://discord.com/api/webhooks/890472004002664448/T58YyTYxJMijUOyNTdxU
 log.basicConfig(level=log.INFO)
 url = "http://127.0.0.1:24050/json"
 
+
 def sendMSG(msg, url):
     data = {
-    "content" : msg,
+        "content": msg,
     }
-    requests.post(url, json = data)
+    requests.post(url, json=data)
+
 
 def startGosu():
     # Change this to the path of your exe if this isnt in the same directory
     os.system("gosumemory.exe")
+
+
+#def checkUpdates():
+    # https://api.github.com/repos/octocat/hello-world/releases/latest
+
 
 try:
     requests.get(url)
@@ -32,14 +39,14 @@ oldState = 0
 while True:
     time.sleep(0.5)
     playerData = requests.get(url).json()
-    
+
     if playerData["menu"]["state"] == oldState:
         continue
-    
+
     if playerData["menu"]["state"] == 7:
         oldState = 7
         log.info("Player is on score screen")
-    
+
     if playerData["menu"]["state"] == 5:
         oldState = 5
         log.info("Player is selecting a map")
