@@ -19,9 +19,10 @@ latestVersion = resp["artifacts"][0]
 print("Download for the newest release of this program:", latestVersion["archive_download_url"])
 
 
-def sendMSG(msg):
+def sendMSG(msg, playerData):
     data = {
-        "content": msg,
+        "content": msg ,
+        "username": playerData["resultsScreen"]["name"]
     }
     requests.post(scoresUrl, json=data)
 
@@ -51,13 +52,16 @@ while True:
 
     if playerData["menu"]["state"] == 7 and oldState == 2:
         oldState = 7
+        if playerData["gameplay"]["accuracy"] == 0: 
+            continue
         log.info("Player just set a score. Sending to discord!")
-        msg = "New play from {}!\n".format(playerData["resultsScreen"]["name"])
-        
+        msg = ""
+        #msg = "New play from {}!\n".format(playerData["resultsScreen"]["name"])
+        msg += "Map/Diff ({}): {} - {} [{}] +{}\n".format("https://osu.ppy.sh/b/{}".format(playerData["menu"]["bm"]["id"]), playerData["menu"]["bm"]["metadata"]["artist"], playerData["menu"]["bm"]["metadata"]["title"], playerData["menu"]["bm"]["metadata"]["difficulty"], playerData["resultsScreen"]["mods"]["str"])
         msg += "▸ {} ▸ {}PP ({}PP for {}% FC) ▸ {}%\n".format(playerData["gameplay"]["hits"]["grade"]["current"], playerData["gameplay"]["pp"]["current"], playerData["gameplay"]["pp"]["fc"], playerData["gameplay"]["accuracy"], playerData["gameplay"]["accuracy"])
-        msg += "▸ {} ▸ x{}/{} ▸ [{}/{}/{}/{}]\n".format(playerData["gameplay"]["score"], playerData["gameplay"]["combo"]["current"], playerData["gameplay"]["combo"]["max"], playerData["gameplay"]["hits"]["300"], playerData["gameplay"]["hits"]["100"], playerData["gameplay"]["hits"]["50"], playerData["gameplay"]["hits"]["0"])
+        msg += "▸ {} ▸ x{}/{} ▸ [{}/{}/{}/{}]\n".format(playerData["gameplay"]["score"], playerData["resultsScreen"]["maxCombo"], playerData["menu"]["bm"]["stats"]["maxCombo"], playerData["gameplay"]["hits"]["300"], playerData["gameplay"]["hits"]["100"], playerData["gameplay"]["hits"]["50"], playerData["gameplay"]["hits"]["0"])
 
-        sendMSG(msg)
+        sendMSG(msg, playerData)
     elif playerData["menu"]["state"] == 7 and oldState != 2:
         oldState = 7
         log.info("Player is looking at a score")
